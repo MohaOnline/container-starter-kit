@@ -2,11 +2,16 @@
     "name": "node-app-hello",
     "version": "1.0.0",
     "description": "A sample express application for demo purpose",
-    "main": "server.js",
+    "main": "index.js",
     "scripts": {
-        "start": "node server.js"
+        "start": "node index.js"
+    },
+    "repository": {
+        "type" : "git",
+        "url" : "https://github.com/MohaOnline/learning-k8s.git"
     },
     "author": "",
+    "license": "Apache-2.0",
     "dependencies": {
         "express": "^4.17.1"
     }
