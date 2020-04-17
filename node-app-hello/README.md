@@ -1,7 +1,6 @@
 ``` bash 
-# remove last built image
+# Rebuilt image
 docker image rm node-app-hello
-
 docker build -t node-app-hello .
 
 docker rm -f node-app-hello-container
