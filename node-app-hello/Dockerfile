@@ -2,7 +2,7 @@
 FROM node:12
 
 # Specify the target directory inside the image in which all following commands will run
-WORKDIR /usr/local/node-app-hello
+WORKDIR /content/node-app-hello
 
 # Copy package files and install dependencies
 COPY package*.json ./

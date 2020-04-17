@@ -7,8 +7,8 @@
         "start": "node index.js"
     },
     "repository": {
-        "type" : "git",
-        "url" : "https://github.com/MohaOnline/learning-k8s.git"
+        "type": "git",
+        "url": "https://github.com/MohaOnline/learning-k8s.git"
     },
     "author": "",
     "license": "Apache-2.0",
