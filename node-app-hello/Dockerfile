@@ -1,3 +1,4 @@
+# npm install 需要科学上网
 # Start from a Node.js 12 (LTS) image
 FROM node:12
 

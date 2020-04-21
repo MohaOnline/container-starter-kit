@@ -29,7 +29,7 @@ const port = process.env.DB_PORT || '5432'
 
 const {
     Pool
-} = require('pg')
+} = require("pg");
 const pool = new Pool({
     user: 'root',
     host: host,
