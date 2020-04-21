@@ -2,7 +2,7 @@
 
 var request = require("request");
 
-const base_url = process.env.BASE_URL || 'http://localhost:3000'
+const base_url = process.env.BASE_URL || 'http://localhost:3000';
 
 describe("API test suite", () => {
   describe("GET /", () => {
