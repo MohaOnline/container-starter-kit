@@ -2,7 +2,7 @@ var express = require('express');
 var app = express();
 
 app.get('/', function (req, res) {
-    res.send('Root Request through Express!');
+    res.send('Root Response through Express!');
 });
 
 app.get('/hello', (req, res) => {
@@ -19,5 +19,5 @@ app.get('/hobbies', (req, res) => {
 
 app.listen(3000, "0.0.0.0", function () {
     console.log('Listening on port 3000!');
-    console.log(' http://localhost:3000');
+    console.log('http://localhost:3000');
 });

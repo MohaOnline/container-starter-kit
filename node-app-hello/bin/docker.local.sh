@@ -7,4 +7,4 @@ docker container run --rm -it \
     --volume ~/:/root \
     -p 3000:3000 \
     node-app-hello \
-    /bin/bash -c './node_modules/.bin/nodemon index.js'
+    /bin/bash -c './node_modules/.bin/nodemon'

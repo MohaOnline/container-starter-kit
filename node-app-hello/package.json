@@ -4,7 +4,8 @@
     "description": "A sample express application for demo purpose",
     "main": "index.js",
     "scripts": {
-        "start": "node index.js"
+        "start": "node index.js",
+        "test": "jasmine"
     },
     "repository": {
         "type": "git",
@@ -16,6 +17,8 @@
         "express": "^4.17.1"
     },
     "devDependencies": {
-        "nodemon": "^2.0.3"
+        "jasmine": "^3.5.0",
+        "nodemon": "^2.0.3",
+        "request": "^2.88.2"
     }
 }
