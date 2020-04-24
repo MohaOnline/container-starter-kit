@@ -7,10 +7,10 @@ pipeline {
       DOCKER_PWD = credentials('ma3310@docker')
     }
     
-    //
+    // 各步骤运行代理
     agent {
       docker {
-        image 'ma3310/node-app-hello'
+        image 'gnschenker/node-docker'
         args '-p 3000:3000'
         args '-v $HOME:/root'
         args '-v /var/run/docker.sock:/var/run/docker.sock'
@@ -30,15 +30,16 @@ pipeline {
       
       stage("Test"){
         steps {
-          sh 'npm test'
+          sh 'jasmine'
         }
       }
 
       stage("Build & Push Docker image") {
         steps {
-          sh 'docker image build -t $registry:$BUILD_NUMBER.'
-          sh 'docker login -u gnschenker -p $DOCKER_PWD'
-          sh 'docker image push $registry:$BUILD_NUMBER'
+          // $BUILD_NUMBER 是 Jenkins 自定义变量
+          sh "docker image build -t $registry:$BUILD_NUMBER ."
+          sh "docker login -u ma3310 -p $DOCKER_PWD"
+          sh "docker image push $registry:$BUILD_NUMBER"
           sh "docker image rm $registry:$BUILD_NUMBER"
         }
       }
