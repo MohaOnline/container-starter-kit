@@ -23,6 +23,15 @@ app.get('/hobbies', (req, res) => {
     res.send(hobbies);
 });
 
+exports.getHobbies = () => {
+    return hobbies;
+}
+exports.getHobby = id => {
+    if (id < 1 || id > hobbies.length)
+        return null;
+    return hobbies[id - 1];
+}
+
 // 数据库相关
 const host = process.env.DB_HOST || 'localhost'
 const port = process.env.DB_PORT || '5432'

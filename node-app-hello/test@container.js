@@ -54,6 +54,7 @@ const {
   const appPort = container.getMappedPort(3000);
   console.log("node-app-hello listening: %d", appPort);
 
+  // 手动验证/测试
   const base_url = `http://localhost:${appPort}`
   console.log("App URL: %s", base_url);
   request.get(base_url + "/pg", (error, response, body) => {
