@@ -1,0 +1,129 @@
+version: "3.7"
+
+networks:
+  frontend:
+  backend:
+
+secrets:
+  nginx_key:
+    external: true
+  nginx_cert:
+    external: true
+  mysql_password:
+    external: true
+  mysql_root_password:
+    external: true
+  exporter_password:
+    external: true
+
+x-restart_policy: &default-restart_policy
+  condition: on-failure
+  delay: 5s
+  max_attempts: 5
+  window: 120s
+
+x-resources: &default-resources_policy
+  limits:
+    cpus: "0.5"
+    memory: 100M
+  reservations:
+    cpus: "0.5"
+    memory: 50M
+
+services:
+  nginx:
+    image: localhost:5000/scw_nginx
+    build: ./nginx
+    secrets:
+      - nginx_cert
+      - nginx_key
+    volumes:
+      - type: bind
+        source: ./nginx/nginx.conf
+        target: /etc/nginx/nginx.conf
+        read_only: yes
+    ports:
+      - 443:8443
+    networks:
+      - frontend
+    deploy:
+      restart_policy: *default-restart_policy
+      resources: *default-resources_policy
+
+  wordpress:
+    image: localhost:5000/scw_wordpress
+    build: ./wordpress
+    volumes:
+      - type: bind
+        source: ./volumes/wordpress_data
+        target: /var/www/html
+    secrets:
+      - source: mysql_password
+        target: wordpress_db_password
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      WORDPRESS_DB_PASSWORD_FILE: /run/secrets/wordpress_db_password
+    ports:
+      - 80:8080
+    networks:
+      - frontend
+      - backend
+    deploy:
+      restart_policy: *default-restart_policy
+      resources: *default-resources_policy
+
+  db:
+    image: localhost:5000/scw_mysql
+    build: ./mysql
+    command: "--default-authentication-plugin=mysql_native_password"
+    volumes:
+      - type: bind
+        source: ./volumes/db_data
+        target: /var/lib/mysql
+    secrets:
+      - mysql_password
+      - mysql_root_password
+      - exporter_password
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+      MYSQL_ROOT_HOST: localhost
+      MYSQL_PASSWORD_FILE: /run/secrets/mysql_password
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+    networks:
+      - backend
+    deploy:
+      restart_policy: *default-restart_policy
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 500M
+        reservations:
+          cpus: "0.5"
+          memory: 250M
+
+  exporter:
+    image: localhost:5000/scw_mysql-exporter
+    build: ./mysql-exporter
+    ports:
+      - 9104:9104
+    networks:
+      - backend
+    secrets:
+      - exporter_password
+    deploy:
+      restart_policy: *default-restart_policy
+      resources: *default-resources_policy
+
+  prometheus:
+    image: localhost:5000/scw_prometheus
+    build: ./prometheus
+    ports:
+      - 9090:9090
+    networks:
+      - backend
+    deploy:
+      restart_policy: *default-restart_policy
+      resources: *default-resources_policy
