@@ -8,5 +8,5 @@ RUN apt-get update && apt install -y \
   iputils-ping \
   lynx \
   net-tools \
-  git \
+  wget \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
