@@ -5,6 +5,7 @@ ENV LANG=C.UTF-8
 
 RUN apt-get update && apt-get upgrade && apt install -y \
   curl \
+  iproute2 \
   iputils-ping \
   lynx \
   net-tools \
