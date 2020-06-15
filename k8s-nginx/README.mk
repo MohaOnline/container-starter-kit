@@ -20,7 +20,7 @@ kubectl run -i --tty --image=ubuntu:20.04 --restart=Never --rm=true k8s-ubuntu
 # 用第三方 Ubuntu 镜像自带网络诊断工具
 kubectl run -i --tty --image=ma3310/ubuntu:20.04 --restart=Never --rm=true k8s-ubuntu
 # 进入 Pod 后可通过 service 名确认服务是否工作
-curl nginx-alpine
+curl nginx-alpine					# nginx-alpine 为 service 的 hostname
 wget -qO - nginx-alpine
 
 # 通过 docker 工具巡查 pod
