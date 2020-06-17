@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-alpine
+  labels:
+    app: nginx-alpine
+spec:
+  # 引用卷
+  volumes:
+  - name: nginx-data
+    persistentVolumeClaim:
+      claimName: pvc-nginx-data
+ 
+  containers:
+  - name: nginx-alpine
+    image: nginx:alpine
+    ports:
+    - containerPort: 80
+    # 绑定卷到 Pod
+    volumeMounts:
+    - name: nginx-data
+      mountPath: /data
