@@ -1,0 +1,80 @@
+##############################################################################
+# 启动附标签 pod: postgres-11 的 PostgreSQL 11 实例
+# 数据持久（kubectl delete 后数据依旧保存），管理员密码为 root，仅供本地开发用
+# Admin password is hard-coding, only for local development
+##############################################################################
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: hosting-pv
+  labels:
+    type: local
+spec:
+  storageClassName: hosting
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/data/hosting/pv"  # 具体在哪里尚不可知
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-11-pvc
+spec:
+  storageClassName: hosting     # 从有相同 storageClassName 的 PersistentVolume 中割取空间
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 2Gi
+
+---      
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: postgres-11 # 生成 pod 的命名主体
+spec:
+  selector:
+    matchLabels:
+      pod: postgres-11
+  serviceName: postgres-11
+  template:
+    metadata:
+      labels:
+        pod: postgres-11
+    spec:
+      volumes:
+        - name: postgres-11-pvc
+          persistentVolumeClaim:
+            claimName: postgres-11-pvc
+      containers:
+        - image: postgres:11
+          name: postgres-11
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: root
+            - name: POSTGRES_PASSWORD
+              value: root
+          volumeMounts:
+            - name: postgres-11-pvc
+              mountPath: "/var/lib/postgresql/data"
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-11-np
+spec:
+  type: NodePort
+  ports:
+    - port: 5432  # 通过 kubectl get service 查看绑定在主机上的可外部访问的端口
+  selector:
+    pod: postgres-11
