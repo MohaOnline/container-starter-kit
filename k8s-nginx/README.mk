@@ -16,10 +16,11 @@ kubectl get services
 kubectl delete service/nginx-alpine
 kubectl describe service nginx-alpine
 
-# ReplicaSet
+# 建删查 ReplicaSet
 kubectl create -f nginx-pod-rs.yml
 kubectl get replicasets.apps
 kubectl get rs
+kubectl describe rs rs-nginx
 
 
 # 可访问 nginx 默认页面
