@@ -5,7 +5,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 80    # 尚不知如何验证
+  - port: 80    # 用 kubectl get service 查看自动分配的端口后，lynx localhost:端口号 可查看。
     protocol: TCP
   selector:
     app: nginx-alpine
