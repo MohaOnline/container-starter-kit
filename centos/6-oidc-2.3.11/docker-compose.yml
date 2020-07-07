@@ -1,3 +1,4 @@
+# docker-compose uses local as volume: https://github.com/docker/compose/issues/2957
 version: "3.3"
 
 services:
