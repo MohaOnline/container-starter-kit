@@ -2,9 +2,8 @@
 version: "3.3"
 
 services:
-    mod-oidc-2.3.11:
+    mod_auth_openidc-2.3.11:
         image: "ma3310/centos:6-oidc-2.3.11"
-        container_name: "mod-oidc-2.3.11"
         restart: always
         volumes: 
             - ./etc/httpd/conf:/opt/rh/httpd24/root/etc/httpd/conf
