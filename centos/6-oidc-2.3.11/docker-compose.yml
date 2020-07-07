@@ -9,6 +9,7 @@ services:
             - ./etc/httpd/conf:/opt/rh/httpd24/root/etc/httpd/conf
             - ./etc/httpd/conf.d:/opt/rh/httpd24/root/etc/httpd/conf.d
             - ./etc/httpd/conf.modules.d:/opt/rh/httpd24/root/etc/httpd/conf.modules.d
+            - ./log:/var/log/httpd24
         ports:
             - 80
             - 443
