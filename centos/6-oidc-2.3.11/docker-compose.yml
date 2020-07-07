@@ -1,10 +1,14 @@
-version: "3.1"
+version: "3.3"
 
 services:
     mod-oidc-2.3.11:
         image: "ma3310/centos:6-oidc-2.3.11"
         container_name: "mod-oidc-2.3.11"
         restart: always
+        volumes: 
+            - ./etc/httpd/conf:/opt/rh/httpd24/root/etc/httpd/conf
+            - ./etc/httpd/conf.d:/opt/rh/httpd24/root/etc/httpd/conf.d
+            - ./etc/httpd/conf.modules.d:/opt/rh/httpd24/root/etc/httpd/conf.modules.d
         ports:
             - 80
             - 443
