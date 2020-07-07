@@ -1,0 +1,8 @@
+#!/bin/sh
+set -e
+source /opt/rh/httpd24/enable 
+
+# Apache gets grumpy about PID files pre-existing
+rm -f /opt/rh/httpd24/root/var/run/httpd/httpd.pid
+
+exec httpd -DFOREGROUND "$@"
