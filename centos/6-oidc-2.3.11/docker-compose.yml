@@ -1,0 +1,11 @@
+version: "3.1"
+
+services:
+    mod-oidc-2.3.11:
+        image: "ma3310/centos:6-oidc-2.3.11"
+        container_name: "mod-oidc-2.3.11"
+        restart: always
+        ports:
+            - 80
+            - 443
+        network_mode: "host"

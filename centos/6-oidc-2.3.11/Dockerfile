@@ -1,4 +1,6 @@
-# ma3310/centos:6-oidc-2.3.11
+# Docker Hub: ma3310/centos:6-oidc-2.3.11
+# Apache Configure Location: /opt/rh/httpd24/root/etc/httpd
+# Document Root: /opt/rh/httpd24/root/var/www/html
 FROM centos:6
 RUN yum install yum install epel-release centos-release-scl https://yum.osc.edu/ondemand/latest/ondemand-release-web-latest-1-6.noarch.rpm -y
 RUN yum update -y
