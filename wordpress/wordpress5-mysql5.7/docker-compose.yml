@@ -1,0 +1,32 @@
+# https://docs.docker.com/compose/wordpress/
+version: '3.3'
+
+services:
+
+  mysql-5.7:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress-5
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+      MYSQL_RANDOM_ROOT_PASSWORD: 'root'
+    volumes:
+      - mysql-5.7:/var/lib/mysql
+
+  wordpress-5:
+    depends_on: 
+      - mysql-5.7
+    image: wordpress:5
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: mysql-5.7
+      WORDPRESS_DB_USER: root
+      WORDPRESS_DB_PASSWORD: root
+      WORDPRESS_DB_NAME: wordpress-5
+    volumes:
+      - wordpress-5:/var/www/html
+
+volumes:
+  wordpress-5: {}
+  mysql-5.7: {}
