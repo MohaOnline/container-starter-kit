@@ -9,7 +9,9 @@ RUN apt-get update && apt-get upgrade -y && apt install -y \
   iproute2 \
   iputils-ping \
   lynx \
+  mariadb-client \
   net-tools \
   nmap \
   wget \
+  zsh \
   && apt-get clean && rm -rf /var/lib/apt/lists/*

@@ -8,7 +8,7 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD: root
         volumes:
-            - ./data/root:/var/lib/mysql
+            - ./data/devel:/var/lib/mysql
         ports:
             - 3306
     phpmyadmin:

@@ -8,7 +8,7 @@ docker build . -t ma3310/ubuntu:20.04-tools
 docker push ma3310/ubuntu:20.04-tools
 
 # 启动客制化 ubuntu 镜像
-docker run --rm -it ma3310/ubuntu:20.04-tools
+docker run --rm -it -v ~/:/root ma3310/ubuntu:20.04-tools /bin/zsh
 ```
 
 # 官方镜像
