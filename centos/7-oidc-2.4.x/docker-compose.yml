@@ -1,0 +1,17 @@
+# docker-compose uses local as volume: https://github.com/docker/compose/issues/2957
+version: "3.4"
+
+services:
+    mod_auth_openidc:
+        image: "ma3310/centos:7-oidc-2.4.x"
+        restart: always
+        volumes: 
+            - /etc/letsencrypt:/etc/letsencrypt
+            - ./etc/httpd/conf:/etc/httpd/conf
+            - ./etc/httpd/conf.d:/etc/httpd/conf.d
+            - ./etc/httpd/conf.modules.d:/etc/httpd/conf.modules.d
+            - ./log:/var/log/httpd
+        ports:
+            - 80
+            - 443
+        network_mode: "host"
