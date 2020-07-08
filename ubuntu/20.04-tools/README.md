@@ -4,15 +4,11 @@
 docker login
 
 # 构建/发布客制化 ubuntu 20.04 镜像
-docker build . -t ma3310/ubuntu:20.04
-docker push ma3310/ubuntu:20.04
-
-# 绑定 20.04 为 latest
-docker tag ma3310/ubuntu:20.04 ma3310/ubuntu
-docker push ma3310/ubuntu
+docker build . -t ma3310/ubuntu:20.04-tools
+docker push ma3310/ubuntu:20.04-tools
 
 # 启动客制化 ubuntu 镜像
-docker run --rm -it ma3310/ubuntu:20.04
+docker run --rm -it ma3310/ubuntu:20.04-tools
 ```
 
 # 官方镜像
