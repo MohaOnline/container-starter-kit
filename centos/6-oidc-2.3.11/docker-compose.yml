@@ -2,7 +2,7 @@
 version: "3.3"
 
 services:
-    mod_auth_openidc-2.3.11:
+    mod_auth_openidc:
         image: "ma3310/centos:6-oidc-2.3.11"
         restart: always
         volumes: 
