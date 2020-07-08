@@ -6,6 +6,7 @@ services:
         image: "ma3310/centos:6-oidc-2.3.11"
         restart: always
         volumes: 
+            - /etc/letsencrypt:/etc/letsencrypt
             - ./etc/httpd/conf:/opt/rh/httpd24/root/etc/httpd/conf
             - ./etc/httpd/conf.d:/opt/rh/httpd24/root/etc/httpd/conf.d
             - ./etc/httpd/conf.modules.d:/opt/rh/httpd24/root/etc/httpd/conf.modules.d

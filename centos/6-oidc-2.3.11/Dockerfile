@@ -12,12 +12,15 @@ RUN yum install httpd24-httpd \
     httpd24-mod_auth_openidc -y
 RUN yum clean all
 
+# Add certbot support
+# ADD https://dl.eff.org/certbot-auto /usr/local/bin/
+# RUN chmod 0755 /usr/local/bin/certbot-auto && /usr/local/bin/certbot-auto -n
+
 # https://httpd.apache.org/docs/2.4/stopping.html#gracefulstop
 STOPSIGNAL SIGWINCH
 
 COPY httpd-foreground /usr/local/bin/
 
-EXPOSE 80
-EXPOSE 443
+EXPOSE 80 443
 
 CMD ["httpd-foreground"]
