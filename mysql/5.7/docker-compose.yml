@@ -12,5 +12,5 @@ services:
             - ./data:/var/lib/mysql
         ports:
             - "3306:3306"
-        network_mode: "host"
+        network_mode: "bridge"
         
