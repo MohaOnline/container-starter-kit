@@ -1,5 +1,5 @@
-# Deployed as local service.
-version: "3.1"
+# Deployed the service in bridge then map 3306 port to host.
+version: "3.3"
 
 services:
 
@@ -7,10 +7,15 @@ services:
         image: "mysql:5.7"
         restart: always
         environment:
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
             - ./data:/var/lib/mysql
+        secrets:
+            - mysql_root_password
         ports:
-            - "3306:3306"
+            - "3306:3306"  # HOST:CONTAINER
         network_mode: "bridge"
-        
+
+secrets:
+    mysql_root_password:
+        file: ./MYSQL_ROOT_PASSWORD
