@@ -6,10 +6,11 @@ services:
     # Choose one of the Database service, or specified no conflict port to start servcies.
     mysql-5.7:
         image: "mysql:5.7"
-        restart: always
+        restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
+            - ./conf/mysql-5.7/mysql.conf.d:/etc/mysql/mysql.conf.d
             - ./data/mysql-5.7:/var/lib/mysql
             - ./logs/mysql-5.7:/var/log/mysql
         secrets:
