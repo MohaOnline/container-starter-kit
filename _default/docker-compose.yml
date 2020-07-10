@@ -9,12 +9,13 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
-            - ./data:/var/lib/mysql
+            - ./data/mysql-5.7:/var/lib/mysql
         secrets:
             - mysql_root_password
         ports:
             - "3306:3306"  # HOST:CONTAINER
-        network_mode: "bridge"
+        networks:
+            - default
 
 secrets:
     mysql_root_password:
