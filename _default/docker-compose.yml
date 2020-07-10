@@ -1,8 +1,9 @@
 # Deployed the service in bridge then map 3306 port to host.
-version: "3.3"
+version: "3.3"  # To use file based secrets.
 
 services:
 
+    # Choose one of the Database service, or specified no conflict port to start servcies.
     mysql-5.7:
         image: "mysql:5.7"
         restart: always
@@ -10,6 +11,7 @@ services:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
             - ./data/mysql-5.7:/var/lib/mysql
+            - ./logs/mysql-5.7:/var/log/mysql
         secrets:
             - mysql_root_password
         ports:
@@ -17,6 +19,7 @@ services:
         networks:
             - default
 
+# Password need be refresh through radom value on production environment.            
 secrets:
     mysql_root_password:
         file: ./MYSQL_ROOT_PASSWORD
