@@ -1,6 +1,6 @@
 # Container Starter Kit
 
-Container Starter Kit provides bounch of out-of-box service receipts basing on Container technoligies considering different senarios.
+Container Starter Kit provides bounch of out-of-box service receipts basing on Container technoligies basing on different senarios.
 
 ## Localhost
 
