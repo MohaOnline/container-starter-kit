@@ -1,10 +1,10 @@
 # Container Starter Kit
 
-Container Starter Kit provides bounch of out-of-box service receipts basing on Container technoligies basing on different senarios.
+Container Starter Kit provides bunch of out-of-box service receipts basing on Container technoligies basing on different senarios.
 
 ## Localhost
 
-Localhost services definations are under _compose folder, they base on docker-compose tools, and could be used in localhost environment.
+Localhost services definations are under _compose folder, these services base on docker-compose tool, and could be used in single machine environment.
 
 Under Root/Cloned folder run:
 
