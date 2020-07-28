@@ -10,9 +10,11 @@ RUN apt-get update && apt-get upgrade -y && apt install -y \
   iputils-ping \
   lynx \
   mariadb-client \
+  mycli \
   net-tools \
   nmap \
   openssh-client \
   wget \
   zsh \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
+  
