@@ -1,6 +1,6 @@
 # Container Starter Kit
 
-Container Starter Kit provides bunch of out-of-box service receipts basing on Container technoligies basing on different senarios.
+Container Starter Kit provides bunch of out-of-box service receipts basing on Container technoligies basing on different senarios. Services runs on docker network csk_default.
 
 ## Localhost
 
