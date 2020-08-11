@@ -1,0 +1,3 @@
+[submodule "waf/modsecurity/3/conf/modsecurity.d/coreruleset"]
+	path = waf/modsecurity/3/conf/modsecurity.d/coreruleset
+	url = https://github.com/coreruleset/coreruleset.git
