@@ -1,3 +1,6 @@
 # Ignores binary data files and log files.
 **/data/*
 **/logs/*
+
+# Ignore nginx production sites.
+prd.**.conf
