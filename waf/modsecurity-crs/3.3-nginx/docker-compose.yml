@@ -15,3 +15,4 @@ services:
             - ./logs:/var/log/nginx
         networks:
             - default
+        user: daemon
