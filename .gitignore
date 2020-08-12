@@ -4,3 +4,4 @@
 
 # Ignore nginx production sites.
 prd.**.conf
+.svn
