@@ -9,7 +9,9 @@ services:
         restart: unless-stopped
         ports:
             - "80:80"        # HOST:CONTAINER
-            - "443:443"      # HOST:CONTAINER
+            - "443:443"      # HOST:CONTAINER    
+        environment:    # Type: Object
+            TZ: Asia/Shanghai
         volumes:
             # Inject Whit IPs.
             - ./conf/modsecurity.d/modsecurity-ip-whitelist.conf:/etc/modsecurity.d/modsecurity-ip-whitelist.conf
