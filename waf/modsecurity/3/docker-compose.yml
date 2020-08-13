@@ -8,13 +8,16 @@ services:
         image: "owasp/modsecurity:3"
         restart: unless-stopped
         ports:
-            - "80:80"        # HOST:CONTAINER
-            - "443:443"      # HOST:CONTAINER
+            - "80:80"           # HOST:CONTAINER
+            - "443:443"         # HOST:CONTAINER
+        environment:            # Type: Object
+            TZ: Asia/Shanghai   # Set timezone for understanding logs contents better.
         volumes:
-            - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf
+            - "./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"    # Read Only
             - ./conf/nginx/conf.d:/etc/nginx/conf.d
             - ./conf/modsecurity.d:/etc/modsecurity.d
-            - ./logs:/var/log/nginx
+            - ./logs/nginx:/var/log/nginx
+            - ./logs/modsecurity:/var/log/modsecurity
             - /etc/letsencrypt:/etc/letsencrypt
         networks:
             - default
