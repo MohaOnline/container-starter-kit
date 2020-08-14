@@ -13,11 +13,11 @@ services:
         environment:            # Type: Object
             TZ: Asia/Shanghai   # Set timezone for understanding logs contents better.
         volumes:
-            - "./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro"    # Read Only
-            - ./conf/nginx/conf.d:/etc/nginx/conf.d
-            - ./conf/modsecurity.d:/etc/modsecurity.d
-            - ./logs/nginx:/var/log/nginx
-            - ./logs/modsecurity:/var/log/modsecurity
-            - /etc/letsencrypt:/etc/letsencrypt
+            - "./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:rw"    # not sure why need write access
+            - "./conf/nginx/conf.d:/etc/nginx/conf.d"
+            - "./conf/modsecurity.d:/etc/modsecurity.d"
+            - "./logs/nginx:/var/log/nginx"
+            - "./logs/modsecurity:/var/log/modsecurity"
+            - "/etc/letsencrypt:/etc/letsencrypt"
         networks:
             - default
