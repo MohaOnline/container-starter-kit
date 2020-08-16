@@ -3,12 +3,13 @@ version: "3.3"  # To use file based secrets.
 
 services:
 
-    tomcat-9-jdk8:
+    php-7.4:
         image: "tomcat:9-jdk8"
         restart: unless-stopped
         volumes:
+            - /var/www/html
         ports:
             # Change host port to suitable value.
-            - "8080:8080"  # HOST:CONTAINER
+            - "8080:80"  # HOST:CONTAINER
         networks:
             - default
