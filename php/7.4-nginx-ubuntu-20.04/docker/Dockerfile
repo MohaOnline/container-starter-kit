@@ -1,8 +1,8 @@
 # Docker Hub: ma3310/php:7.4-nginx-ubuntu-20.04
 FROM ubuntu:20.04
 
-ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
 
 # https://askubuntu.com/questions/365911/why-the-services-do-not-start-at-installation
 # RUN echo "exit 0" > /usr/sbin/policy-rc.d
