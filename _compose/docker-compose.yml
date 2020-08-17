@@ -3,20 +3,33 @@ version: "3.3"  # To use file based secrets.
 
 services:
 
-    # Choose one of the Database service, or specified no conflict port to start servcies.
+    php-7.4:
+        image: "ma3310/php:7.4-nginx-ubuntu-20.04"
+        restart: unless-stopped
+        ports:
+            # HOST:CONTAINER
+            - "8074:80"
+            - "44374:443"
+        networks:
+            - default
+
+    # Database Services
+    # Choose one of the Database service, or specified no conflict port to start services.
     mysql-5.7:
         image: "mysql:5.7"
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
-            - ./conf/mysql-5.7/mysql.conf.d:/etc/mysql/mysql.conf.d
-            - ./data/mysql-5.7:/var/lib/mysql
-            - ./logs/mysql-5.7:/var/log/mysql
+            - "./conf/mysql-5.7/mysql.conf.d:/etc/mysql/mysql.conf.d"
+            - "./data/mysql-5.7:/var/lib/mysql"
+            - "./logs/mysql-5.7:/var/log/mysql:rw"
+        command: '/bin/sh -c "chown -R mysql:mysql /var/log/mysql; docker-entrypoint.sh mysqld"'
         secrets:
             - mysql_root_password
         ports:
-            - "3306:3306"  # HOST:CONTAINER
+            # HOST:CONTAINER
+            - "3306:3306"
         networks:
             - default
 
