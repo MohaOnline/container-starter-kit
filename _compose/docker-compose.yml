@@ -1,22 +1,27 @@
 # Deployed the service in bridge then map 3306 port to host.
-version: "3.3"  # To use file based secrets.
+version: '3.3'  # To use file based secrets.
 
 services:
 
     php-7.4:
-        image: "ma3310/php:7.4-nginx-ubuntu-20.04"
+        image: 'ma3310/php:7.4-nginx-ubuntu-20.04'
         restart: unless-stopped
         ports:
             # HOST:CONTAINER
-            - "8074:80"
-            - "44374:443"
+            - '8074:80'
+            - '44374:443'
+        volumes:
+            - './conf/php/7.4:/etc/php/7.4'
+            - './logs:/var/log'
+            - './logs/nginx:/var/log/nginx'
+            - '/etc/letsencrypt:/etc/letsencrypt'
         networks:
             - default
 
     # Database Services
     # Choose one of the Database service, or specified no conflict port to start services.
     mysql-5.7:
-        image: "mysql:5.7"
+        image: 'mysql:5.7'
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password

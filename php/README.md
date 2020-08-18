@@ -6,6 +6,7 @@ Access related Docker images at https://hub.docker.com/r/ma3310/php.
 
 ## ma3310/php:7.4-nginx-ubuntu-20.04
 
+With default configuration, this image only listen 80 port for http service.
 
 ## Official PHP 7.4-cli
 
