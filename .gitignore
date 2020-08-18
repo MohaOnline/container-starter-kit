@@ -1,3 +1,5 @@
+/_compose/docker-compose.yml
+
 # Ignores binary data files and log files.
 **/data/*
 **/logs/*
