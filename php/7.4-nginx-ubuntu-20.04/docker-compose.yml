@@ -4,12 +4,12 @@ version: "3.3"  # To use file based secrets.
 services:
 
     php-7.4:
-        image: "tomcat:9-jdk8"
+        image: "ma3310/php:7.4-nginx-ubuntu-20.04"
         restart: unless-stopped
         volumes:
             - /var/www/html
         ports:
             # Change host port to suitable value.
-            - "8080:80"  # HOST:CONTAINER
+            - "8074:80"  # HOST:CONTAINER
         networks:
             - default
