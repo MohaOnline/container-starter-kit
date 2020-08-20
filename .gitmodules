@@ -1,7 +1,7 @@
 [submodule "waf/modsecurity/3/conf/modsecurity.d/coreruleset"]
 	path = waf/modsecurity/3/conf/modsecurity.d/coreruleset
 	url = https://github.com/coreruleset/coreruleset.git
-[submodule "ubuntu"]
+[submodule "images-ubuntu"]
 	path = images-ubuntu
 	url = https://github.com/ma3310/images-ubuntu
 [submodule "images-php"]
