@@ -2,6 +2,14 @@
 version: '3.3'  # To use file based secrets.
 
 services:
+    prepare:
+        image: ubuntu:20.04
+        container_name: csk-one-time-running
+        volumes:
+            - './logs:/mnt'
+        command:
+            # Prepare log files for late using.
+            sh -c "touch /mnt/modsec_audit.log /mnt/php7.4-fpm.log"
 
     php-7.4:
         image: 'ma3310/php:7.4-nginx-ubuntu-20.04'
@@ -13,7 +21,7 @@ services:
         volumes:
             - './conf/nginx/sites-enabled:/etc/nginx/sites-enabled'
             - './conf/php/7.4:/etc/php/7.4'
-            - './logs:/var/log'
+            - './logs/php7.4-fpm.log:/var/log/php7.4-fpm.log'
             - './logs/nginx:/var/log/nginx'
             - '/etc/letsencrypt:/etc/letsencrypt'
         networks:
