@@ -11,6 +11,7 @@ services:
             - '8074:80'
             - '44374:443'
         volumes:
+            - './conf/nginx/sites-enabled:/etc/nginx/sites-enabled'
             - './conf/php/7.4:/etc/php/7.4'
             - './logs:/var/log'
             - './logs/nginx:/var/log/nginx'
@@ -22,6 +23,7 @@ services:
     # Choose one of the Database service, or specified no conflict port to start services.
     mysql-5.7:
         image: 'mysql:5.7'
+        container_name: csk-mysql-5.7
         restart: unless-stopped
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
