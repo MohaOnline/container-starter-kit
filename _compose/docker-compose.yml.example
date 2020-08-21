@@ -44,7 +44,25 @@ services:
             - mysql_root_password
         ports:
             # HOST:CONTAINER
-            - "3306:3306"
+            - "33576:3306"
+        networks:
+            - default
+
+    mysql-8.0:
+        image: 'mysql:8.0'
+        container_name: csk-mysql-8.0
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+        volumes:
+            - './data/mysql-8.0:/var/lib/mysql'
+            - './logs/mysql-8.0:/var/log/mysql:rw'
+        command: '/bin/sh -c "chown -R mysql:mysql /var/log/mysql; docker-entrypoint.sh mysqld"'
+        secrets:
+            - mysql_root_password
+        ports:
+            # HOST:CONTAINER
+            - "33806:3306"
         networks:
             - default
 
