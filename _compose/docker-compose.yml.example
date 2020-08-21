@@ -55,6 +55,8 @@ services:
         environment:
             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
         volumes:
+            - './conf/mysql-8.0/my.cnf/etc/mysql/my.cnf'
+            - './conf/mysql-8.0/conf.d:/etc/mysql/conf.d'
             - './data/mysql-8.0:/var/lib/mysql'
             - './logs/mysql-8.0:/var/log/mysql:rw'
         command: '/bin/sh -c "chown -R mysql:mysql /var/log/mysql; docker-entrypoint.sh mysqld"'
