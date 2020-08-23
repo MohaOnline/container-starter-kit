@@ -24,6 +24,7 @@ services:
             - './logs/php7.4-fpm.log:/var/log/php7.4-fpm.log'
             - './logs/nginx:/var/log/nginx'
             - '/etc/letsencrypt:/etc/letsencrypt'
+            - '~:/root'
         networks:
             - default
 
@@ -39,7 +40,8 @@ services:
             - "./conf/mysql-5.7/mysql.conf.d:/etc/mysql/mysql.conf.d"
             - "./data/mysql-5.7:/var/lib/mysql"
             - "./logs/mysql-5.7:/var/log/mysql:rw"
-        command: '/bin/sh -c "chown -R mysql:mysql /var/log/mysql; docker-entrypoint.sh mysqld"'
+        command: 
+            '/bin/sh -c "chown -R mysql:mysql /var/log/mysql; docker-entrypoint.sh mysqld"'
         secrets:
             - mysql_root_password
         ports:
