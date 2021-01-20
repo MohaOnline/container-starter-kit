@@ -1,4 +1,10 @@
 # Deployed the service in bridge then map port to host.
+# attach to container to install certbot as default certificates need be renewed here.
+# apt update && apt dist-upgrade
+# apt install cron vim
+# apt install certbot python-certbot-nginx
+# certbot renew --nginx
+#
 version: "3.3"  # To use file based secrets.
 
 services:
@@ -8,7 +14,7 @@ services:
         image: "owasp/modsecurity-crs:3.3-nginx"
         restart: unless-stopped
         ports:                  # Type: Array
-            - "80:80"           # HOST:CONTAINER
+            - "80:80"           # HOST_PORT:CONTAINER_PORT
             - "443:443"         
         environment:            # Type: Object
             TZ: Asia/Shanghai   # Set timezone for understanding logs contents better.
