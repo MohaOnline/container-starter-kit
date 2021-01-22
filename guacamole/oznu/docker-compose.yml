@@ -1,0 +1,16 @@
+version: "2"
+services:
+  guacamole:
+    image: oznu/guacamole
+    container_name: guacamole
+    volumes:
+      - guacamole_config:/config
+    environment:
+      # Active 2-factor login with verify code
+      EXTENSIONS: auth-totp 
+    ports:
+      - 8888:8080
+volumes:
+  # Keep configuration data
+  guacamole_config:
+    driver: local
