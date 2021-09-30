@@ -10,3 +10,8 @@
 [submodule "net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system"]
 	path = net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system
 	url = https://github.com/MicrosoftDocs/mslearn-hotel-reservation-system.git
+
+[submodule "waf/modsecurity-crs/3.3-nginx/conf/modsecurity.d/owasp-crs"]
+  path = waf/modsecurity-crs/3.3-nginx/conf/modsecurity.d/owasp-crs
+	url = https://github.com/coreruleset/coreruleset.git
+	
