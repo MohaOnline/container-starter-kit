@@ -1,0 +1,18 @@
+version: '3.3'  # To use file based secrets.
+
+services:
+  jenkins-lts-jdk11:
+    image: jenkins/jenkins:lts-jdk11
+    restart: unless-stopped
+    ports:
+      # HOST:CONTAINER
+      - '80:8080'
+    environment:
+      - 'JAVA_OPTS=-Xms1024m -Xmx1024m'
+    volumes:
+      - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
+      - '~/:/root'
+    network_mode: "bridge"
+volumes:
+  jenkins_home_lts_jdk11:
+  jenkins_home_lts_jdk11_proxy:
