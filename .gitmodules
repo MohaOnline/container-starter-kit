@@ -11,6 +11,8 @@
 [submodule "images-ubuntu"]
 	path = images-ubuntu
 	url = https://github.com/ma3310/images-ubuntu
+	branch = master
+	
 [submodule "images-php"]
 	path = images-php
 	url = https://github.com/ma3310/images-php.git
