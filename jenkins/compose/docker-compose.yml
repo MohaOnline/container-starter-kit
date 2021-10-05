@@ -1,20 +1,39 @@
 version: '3.3'  # To use file based secrets.
 
 services:
+  docker-dind:
+    image: docker:dind
+    ports:
+      - '3000:3000'
+      - '2376:2376'
+    volumes:
+      - 'docker_certs:/certs/client'
+      - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
+    environment:
+      - DOCKER_TLS_CERTDIR=/certs
+    privileged: true
+    command: --storage-driver=overlay2
+    
   jenkins-lts-jdk11:
-    image: jenkins/jenkins:lts-jdk11
+    image: ma3310/jenkins:lts-jdk11-tools
     restart: unless-stopped
     ports:
       # HOST:CONTAINER
       - '80:8080'
     environment:
       - 'JAVA_OPTS=-Xms2048m -Xmx3072m'
+      - DOCKER_HOST=tcp://docker-dind:2376
+      - DOCKER_CERT_PATH=/certs/client
+      - DOCKER_TLS_VERIFY=1
     volumes:
       - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
-      - '/var/run/docker.sock:/var/run/docker.sock'
-      - '~/:/root/'
-    network_mode: "bridge"
+      - 'docker_certs:/certs/client'
+#      - '/var/run/docker.sock:/var/run/docker.sock'
+      - '$HOME:/root'
+    # network_mode: "bridge"
+
 volumes:
+  docker_certs:
   # compose_jenkins_home_lts_jdk11
   jenkins_home_lts_jdk11:
   # compose_jenkins_home_lts_jdk11_proxy
