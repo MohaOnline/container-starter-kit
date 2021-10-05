@@ -1,19 +1,31 @@
 version: '3.3'  # To use file based secrets.
 
 services:
-  docker-dind:
-    image: docker:dind
-    ports:
-      - '3000:3000'
-      - '2376:2376'
-    volumes:
-      - 'docker_certs:/certs/client'
-      - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
-    environment:
-      - DOCKER_TLS_CERTDIR=/certs
-    privileged: true
-    command: --storage-driver=overlay2
-    
+
+  # docker-dind:
+  #   image: docker:dind
+  #   ports:
+  #     - '3000:3000'
+  #     - '2376:2376'
+  #   volumes:
+  #     - 'docker_certs:/certs/client'
+  #     - 'docker_libs:/var/lib/docker'
+  #     - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
+  #   environment:
+  #     - DOCKER_TLS_CERTDIR=/certs
+  #   privileged: true
+  #   command: --storage-driver=overlay2
+
+  # socat:
+  #   image: "alpine/socat"
+  #   container_name: socat
+  #   restart: "always"
+  #   volumes:
+  #     - "/var/run/docker.sock:/var/run/docker.sock"
+  #   ports:
+  #     - "2375:2375"
+  #   command: "tcp-listen:2375,fork,reuseaddr unix-connect:/var/run/docker.sock"
+
   jenkins-lts-jdk11:
     image: ma3310/jenkins:lts-jdk11-tools
     restart: unless-stopped
@@ -22,17 +34,17 @@ services:
       - '80:8080'
     environment:
       - 'JAVA_OPTS=-Xms2048m -Xmx3072m'
-      - DOCKER_HOST=tcp://docker-dind:2376
-      - DOCKER_CERT_PATH=/certs/client
-      - DOCKER_TLS_VERIFY=1
+#      - DOCKER_HOST=tcp://localhost:2375
+      - DOCKER_HOST=tcp://10.189.184.218:2375
     volumes:
       - 'jenkins_home_lts_jdk11_proxy:/var/jenkins_home'
-      - 'docker_certs:/certs/client'
+#     - 'docker_certs:/certs/client'
 #      - '/var/run/docker.sock:/var/run/docker.sock'
-      - '$HOME:/root'
-    # network_mode: "bridge"
+      - '$HOME/.m2:/home/jenkins'
+#    network_mode: "host"
 
 volumes:
+  docker_libs:
   docker_certs:
   # compose_jenkins_home_lts_jdk11
   jenkins_home_lts_jdk11:
