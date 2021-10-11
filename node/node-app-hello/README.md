@@ -10,6 +10,8 @@ docker run --rm -it \
   -p 3000:3000 \
   -v $HOME:/root
   node-app-hello
+
+docker run --rm -it -v $HOME:/root node:lts
 ```
 
 安装开发依赖
