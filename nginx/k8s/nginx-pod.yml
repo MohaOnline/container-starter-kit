@@ -6,7 +6,7 @@ metadata:
     app: nginx-alpine
 spec:
   containers:
-  - name: nginx-alpine
-    image: nginx:alpine
-    ports:
-    - containerPort: 80
+    - name: nginx-alpine
+      image: nginx:alpine
+      ports:
+      - containerPort: 80

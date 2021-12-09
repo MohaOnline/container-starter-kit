@@ -1,0 +1,24 @@
+kubectl version
+
+kubectl apply -f nginx-volume-claim.yml
+kubectl delete -f nginx-volume-claim.yml
+kubectl get persistentvolumeclaims
+kubectl get pvc
+
+kubectl get pv
+kubectl patch pv <your-pv-name> -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
+
+# dashboard
+# 准备默认依赖账号
+kubectl create serviceaccount kube-system:kubernetes-dashboard
+kubectl create sa -n kube-system
+kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+kubectl get secrets -n kube-system | grep kubernetes-dashboard
+kubectl describe secret kubernetes-dashboard-token- -n kube-system
+
+
+az aks enable-addons -g $RESOURCE_GROUP -n -a kube-dashboard
+az aks browse -g $RESOURCE_GROUP -n -a kube-dashboard
+
+
+

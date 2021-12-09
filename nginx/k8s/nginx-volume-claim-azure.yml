@@ -1,0 +1,21 @@
+# https://kubernetes.io/zh/docs/concepts/storage/persistent-volumes/
+# Operations:
+# kubectl apply -f nginx-volume-claim-azure.yml
+# kubectl get persistentvolumeclaims
+# kubectl get pvc
+# kubectl describe pvc nginx-html-claim-azure
+
+# kubectl get pv
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nginx-html-claim-azure # claimName
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: 
+    managed-premium
+  resources:
+    requests:
+      storage: 5Gi

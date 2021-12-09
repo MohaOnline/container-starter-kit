@@ -1,0 +1,22 @@
+# Run claim first: 
+#   kubectl apply -f nginx-volume-claim-azure.yml
+# Operations
+#   kubectl apply -f nginx-pod-claim-azure.yml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod-with-claim-azure
+
+spec:
+  containers:
+    - name: nginx-with-html-claim-azure
+      image: nginx
+      volumeMounts:
+        - mountPath: "/var/www/html"
+          name: nginx-html-claim-azure
+
+  volumes:
+    - name: nginx-html-claim-azure
+      persistentVolumeClaim:
+        claimName: nginx-html-claim-azure
