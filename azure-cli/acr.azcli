@@ -1,0 +1,4 @@
+# setup
+az config set defaults.acr=	
+az acr repository list
+

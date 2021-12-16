@@ -1,7 +1,10 @@
+# Service for nginx-pod.yml
 apiVersion: v1
 kind: Service
 metadata:
   name: nginx-alpine
+  labels:
+    app: nginx-alpine
 spec:
   type: LoadBalancer
   ports:

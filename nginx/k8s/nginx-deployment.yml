@@ -1,6 +1,8 @@
+# 可以在 minikube 中部署
 # kubectl apply -f nginx-deployment.yml
 # kubectl get deployments 
 # kubectl describe deployment nginx-deployment
+# kubectl describe pod nginx-deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:

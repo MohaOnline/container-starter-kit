@@ -1,0 +1,9 @@
+# 通过环境变量设置 kubectl 配置文件
+export KUBECONFIG=/root/.kube/config
+
+
+kubectl get deployments
+kubectl get pods
+
+
+# Azure k8s
