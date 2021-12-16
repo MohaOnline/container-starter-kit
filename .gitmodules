@@ -16,9 +16,8 @@
 [submodule "images-php"]
 	path = images-php
 	url = https://github.com/ma3310/images-php.git
+	branch = master
 
 [submodule "net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system"]
 	path = net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system
 	url = https://github.com/MicrosoftDocs/mslearn-hotel-reservation-system.git
-
-	
