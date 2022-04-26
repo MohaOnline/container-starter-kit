@@ -1,13 +1,20 @@
+# Image URL: https://hub.docker.com/_/nginx?tab=tags
+# 部署
+# kubectl apply -f nginx-pod.yml
+# 确认
+# kubectl get pod nginx-1.21
+# kubectl get pod nginx-1.21 -o yaml
+# kubectl delete pod nginx-1.21
 apiVersion: v1
 kind: Pod
 metadata:
-  name: nginx-alpine
+  name: nginx-1.21
   labels:
-    app: nginx-alpine
+    app: nginx_1.21
 spec:
   containers:
-    - name: nginx-alpine
-      image: nginx:alpine
+    - name: nginx
+      image: nginx:1.21
       resources:
         requests:
           memory: "128Mi"

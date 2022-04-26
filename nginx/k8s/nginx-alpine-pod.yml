@@ -1,0 +1,20 @@
+# kubectl get pod nginx-alpine
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-alpine
+  labels:
+    app: nginx-alpine
+spec:
+  containers:
+    - name: nginx-alpine
+      image: nginx:alpine
+      resources:
+        requests:
+          memory: "128Mi"
+          cpu: "0.5"
+        limits:
+          memory: "512Mi"
+          cpu: "1"
+      ports:
+      - containerPort: 80
