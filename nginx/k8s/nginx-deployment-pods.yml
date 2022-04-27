@@ -1,0 +1,43 @@
+# Image URL: https://hub.docker.com/_/nginx?tab=tags
+# 部署
+#   kubectl apply -f nginx-deployment-pods.yml
+# 删除
+#   kubectl delete -f nginx-deployment-pods.yml
+#   kubectl delete deployments.apps nginx-deployment
+# 确认
+#   kubectl get deployments -o wide
+#   kubectl get deployments.apps nginx-deployment -o wide 
+#   kubectl get replicasets -o wide   
+#   kubectl get pod -l app=nginx-deployment-pods
+#   kubectl get pod -l app=nginx-deployment-pods -o wide
+# 参考
+#   kubectl explain deployment.spec  
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-deployment-pods
+  template:   # Describes the pods that will be created.
+    metadata:
+      name: nginx-deployment-pods
+      labels:
+        app: nginx-deployment-pods
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.21
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.5"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+          - containerPort: 80
