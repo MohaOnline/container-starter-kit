@@ -5,5 +5,17 @@ export KUBECONFIG=/root/.kube/config
 kubectl get deployments
 kubectl get pods
 
+kubectl explain namespace
+kubectl create namespace tanan-cn
+
+# Pods 可在 metadata 添加 namespace 设置
+kubectl explain pods.metadata
 
 # Azure k8s
+
+
+
+
+kubectl create secret mysql-dev --from-literal 
+
+kubectl explain pod.spec.containers.env.valueFrom

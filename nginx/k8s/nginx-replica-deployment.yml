@@ -1,0 +1,42 @@
+# ReplicaSet 仅监控 Pod 数量
+# Image URL: https://hub.docker.com/_/nginx?tab=tags
+# 部署
+#   kubectl apply -f nginx-replica.yml
+# 删除
+#   kubectl delete -f nginx-replica.yml
+# 确认
+#   kubectl get pod -l app=nginx_replica -o wide
+#   kubectl get pod -l app=nginx_replica -o yaml
+#   kubectl get rs nginx-replica -o wide
+# 说明
+#   kubectl explain ReplicaSet
+#   kubectl explain ReplicaSet.spec
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replica # replicaset.apps/nginx-replica
+  labels:
+    app: nginx-replica
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-replica-pods
+  template:
+    metadata:
+      name: nginx-replica-pods
+      labels:
+        app: nginx-replica-pods
+    spec:
+      containers:
+        - name: nginx
+          image: nginx:1.21
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.5"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+          - containerPort: 80

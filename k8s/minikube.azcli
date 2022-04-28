@@ -1,0 +1,9 @@
+# Version: https://github.com/kubernetes/minikube
+
+# Install 
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+minikube addons list
+minikube addons enable ingress
+minikube addons enable ingress-dns
