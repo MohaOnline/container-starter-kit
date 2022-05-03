@@ -2,22 +2,27 @@
 	path = waf/modsecurity/3/conf/modsecurity.d/coreruleset
 	url = https://github.com/coreruleset/coreruleset.git
 	branch = v3.3/master
+	ignore = dirty
 
 [submodule "waf/modsecurity-crs/3.3-nginx/conf/modsecurity.d/owasp-crs"]
   path = waf/modsecurity-crs/3.3-nginx/conf/modsecurity.d/owasp-crs
 	url = https://github.com/coreruleset/coreruleset.git
 	branch = v3.3/master
-	
+	ignore = dirty
+
 [submodule "images-ubuntu"]
 	path = images-ubuntu
 	url = https://github.com/ma3310/images-ubuntu
 	branch = master
+	ignore = dirty
 	
 [submodule "images-php"]
 	path = images-php
 	url = https://github.com/ma3310/images-php.git
 	branch = master
+	ignore = dirty
 
 [submodule "net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system"]
 	path = net-core/mslearn-hotel-reservation-system/mslearn-hotel-reservation-system
 	url = https://github.com/MicrosoftDocs/mslearn-hotel-reservation-system.git
+	ignore = dirty

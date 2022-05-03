@@ -2,6 +2,15 @@
 
 Container Starter Kit provides bunch of out-of-box service receipts basing on Container technoligies basing on different senarios. Services runs on docker network csk_default.
 
+## Local Repo
+This project contains multiple submodules, leverage below commands to initialize the cloned local Repo. 
+
+``` bash
+git config diff.ignoreSubmodules dirty
+# Pull latest codes from Remote
+git submodule update --init --remote
+```
+
 ## Localhost
 
 Localhost services definations are under _compose folder, these services base on docker-compose tool, and could be used in single machine environment.
