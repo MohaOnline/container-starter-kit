@@ -1,21 +1,29 @@
 kubectl version
+minikube ip
 
-##### nginx-deployment-pods.yml & Job
+##### for nginx-deployment-pods.yml & Job
 # Image URL: https://hub.docker.com/_/nginx?tab=tags
 cd nginx/k8s
 
 # 部署
 kubectl apply -f nginx-deployment-pods.yml
 kubectl apply -f nginx-deployment-pods-job.yml
+kubectl apply -f nginx-deployment-pods-service.yml  # 部署 nginx-deployment-service
 
 # 回滚
 kubectl rollout undo deployment nginx-deployment
 
 # 删除
 kubectl delete -f nginx-deployment-pods.yml
-kubectl delete -f nginx-deployment-pods-job.yml
 kubectl delete deployments.apps nginx-deployment
 
+kubectl delete -f nginx-deployment-pods-job.yml
+kubectl delete -f nginx-deployment-pods-service.yml
+
+kubectl get nodes -o wide
+kubectl get services -o wide
+kubectl get service nginx-deployment-service -o wide
+minikube service nginx-deployment-service --url # 查询 NodePort 可访问的 URL
 kubectl get deployments -o wide
 kubectl get replicasets -o wide   
 kubectl get jobs -o wide
@@ -34,6 +42,7 @@ kubectl logs -l app=curl
 kubectl explain deployment.spec  
 kubectl explain job.metadata
 kubectl explain job.spec
+kubectl explain service.spec
 
 ###############################################################################
 

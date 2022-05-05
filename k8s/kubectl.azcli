@@ -1,6 +1,13 @@
-# 通过环境变量设置 kubectl 配置文件
+# 通过环境变量设置 kubectl 配置文件，可引用第三方提供的 kubectl 配置文件
 export KUBECONFIG=/root/.kube/config
+$env:KUBECONFIG="$HOME\\.kube\\config" 
 
+kubectl config get-clusters
+kubectl config get-contexts
+kubectl config current-context
+
+kubectl cluster-info 
+kubectl get nodes -o wide
 
 kubectl get deployments
 kubectl get pods
@@ -15,7 +22,7 @@ kubectl explain pods.metadata
 
 
 
-
+# 
 kubectl create secret mysql-dev --from-literal 
 
 kubectl explain pod.spec.containers.env.valueFrom

@@ -1,6 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
-metadata:
+metadata: # Deployment name and labels
   name: nginx-deployment
   labels:
     app: nginx-deployment
@@ -9,10 +9,10 @@ spec:
   selector:
     matchLabels:
       app: nginx-deployment-pods
-  template:   # Describes the pods that will be created.
-    metadata:
+  template:     # Describes the pods that will be created.
+    metadata:   # Pods' name & label
       name: nginx-deployment-pods
-      labels:
+      labels:           
         app: nginx-deployment-pods
     spec:
       containers:
