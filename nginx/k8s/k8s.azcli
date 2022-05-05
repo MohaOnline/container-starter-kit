@@ -1,5 +1,42 @@
 kubectl version
 
+##### nginx-deployment-pods.yml & Job
+# Image URL: https://hub.docker.com/_/nginx?tab=tags
+cd nginx/k8s
+
+# 部署
+kubectl apply -f nginx-deployment-pods.yml
+kubectl apply -f nginx-deployment-pods-job.yml
+
+# 回滚
+kubectl rollout undo deployment nginx-deployment
+
+# 删除
+kubectl delete -f nginx-deployment-pods.yml
+kubectl delete -f nginx-deployment-pods-job.yml
+kubectl delete deployments.apps nginx-deployment
+
+kubectl get deployments -o wide
+kubectl get replicasets -o wide   
+kubectl get jobs -o wide
+kubectl get pods -o wide
+kubectl get pods -o wide --show-labels
+kubectl get pod -l app=nginx-deployment-pods -o wide
+kubectl get pod -l app=nginx-deployment-pods-job -o wide
+
+kubectl get deployments.apps nginx-deployment -o wide 
+kubectl get deployments nginx-deployment -o yaml  
+
+kubectl logs curl-fsvlg
+kubectl logs -l app=curl
+
+# 参考
+kubectl explain deployment.spec  
+kubectl explain job.metadata
+kubectl explain job.spec
+
+###############################################################################
+
 kubectl apply -f nginx-volume-claim.yml
 kubectl delete -f nginx-volume-claim.yml
 kubectl get persistentvolumeclaims

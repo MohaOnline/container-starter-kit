@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: nginx-deployment-job
+  labels:
+    app: nginx-deployment-job
+spec:
+  template:
+    metadata:
+      # Pod's label
+      labels:
+        app: nginx-deployment-pods-job
+    spec:
+      containers:
+      - image: curlimages/curl
+        command: [ "/bin/sh", "-c", "--" ]
+        args: [ "curl -s -f --connect-timeout 5 http://172.17.0.2"]
+        name: nginx-deployment-pods-job
+      restartPolicy: Never
