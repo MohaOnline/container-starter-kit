@@ -12,6 +12,23 @@ minikube start --image-mirror-country='cn' --registry-mirror=https://.mirror.ali
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
+# Install - deb
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+
+
 minikube addons list
 minikube addons enable ingress
 minikube addons enable ingress-dns
+
+kubectl create deployment echo-server --image=k8s.gcr.io/echoserver:1.4
+kubectl get deployment -o wide
+
+kubectl expose deployment echo-server --type=NodePort --port=8080 # Port in Container, 创建 NodePort Service
+kubectl expose deployment echo-server --type=LoadBalancer --port=8080
+kubectl delete service    echo-server
+kubectl get service -o wide
+
+minikube service echo-server 
+minikube service echo-server --url
+kubectl get service echo-server --output='jsonpath="{.spec.ports[0].nodePort}"'
