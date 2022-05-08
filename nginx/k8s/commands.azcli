@@ -1,5 +1,8 @@
 kubectl version
 minikube ip
+minikube addons enable ingress
+minikube addons enable ingress-dns
+
 
 ##### for nginx-deployment-pods.yml & Job
 # Image URL: https://hub.docker.com/_/nginx?tab=tags
@@ -9,6 +12,8 @@ cd nginx/k8s
 kubectl apply -f nginx-deployment-pods.yml
 kubectl apply -f nginx-deployment-pods-job.yml
 kubectl apply -f nginx-deployment-pods-service.yml  # 部署 nginx-deployment-service
+kubectl get pods -n ingress-nginx
+kubectl apply -f nginx-deployment-pods-service-ingress.yml  
 
 # 回滚
 kubectl rollout undo deployment nginx-deployment
@@ -20,9 +25,10 @@ kubectl delete deployments.apps nginx-deployment
 kubectl delete -f nginx-deployment-pods-job.yml
 kubectl delete -f nginx-deployment-pods-service.yml
 
+# 巡查
 kubectl get nodes -o wide
 kubectl get services -o wide
-kubectl get service nginx-deployment-service -o wide
+kubectl get service nginx-deployment-pods-service -o wide
 minikube service nginx-deployment-service --url # 查询 NodePort 可访问的 URL
 kubectl get deployments -o wide
 kubectl get replicasets -o wide   

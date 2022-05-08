@@ -1,3 +1,5 @@
+# 部署三个 Pods
+# 操作指令参考 commands.azcli
 apiVersion: apps/v1
 kind: Deployment
 metadata: # Deployment name and labels

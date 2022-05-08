@@ -9,6 +9,14 @@ kubectl config current-context
 kubectl cluster-info 
 kubectl get nodes -o wide
 
+# 部署 google sample: hello-app，该应用运行于 8080 端口
+kubectl create deployment google-hello --image=gcr.io/google-samples/hello-app:1.0
+kubectl delete deployment google-hello  # 删除
+kubectl describe pod google-hello
+kubectl expose deployment google-hello --type=ClusterIP --port=8080
+minikube service google-hello --url
+
+
 kubectl get deployments
 kubectl get pods
 

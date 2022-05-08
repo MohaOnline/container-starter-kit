@@ -1,0 +1,20 @@
+# Deploy ingress rules
+apiVersion: networking.k8s.io/v1
+
+# Need enable ingress by: minikube addons enable ingress
+# check ingress is running by: kubectl get pods -n ingress-nginx
+kind: Ingress
+metadata:
+  name: minikube-basic-ingress
+spec:
+  rules:    # Accessible domain name, IP part need follow result of 'minikube ip'
+    - host: nginx-deployment-pods-service.192.168.49.2.nip.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: nginx-deployment-pods-service     # Service Name
+                port:
+                  number: 80
