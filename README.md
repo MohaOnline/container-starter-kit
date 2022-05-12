@@ -38,7 +38,8 @@ mysql -hcst_mysql-5.7_1 -p
 ```
 
 ## Azure CLI
-Commands used in this project are stored in .azcli file, which leverages 'run command line' of Azure CLI Tools plugin.
+The commands used are stored in .azcli file, which could leverage 'Run Line in Terminal' function of Azure CLI Tools VS code plugin to issue commands without select / copy / paste. The plugin needs Azure CLI, to install it, refer to following command.
+
 ``` bash
 curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```
