@@ -2,7 +2,7 @@
 
 Container Starter Kit provides bunch of out-of-box service receipts basing on Container technoligies basing on different senarios. Services runs on docker network csk_default.
 
-## Local Repo
+## Submodules
 This project contains multiple submodules, leverage below commands to initialize the cloned local Repo. 
 
 ``` bash
@@ -35,4 +35,10 @@ docker run --rm -it --network=cst_default -v ~/:/root ma3310/ubuntu:20.04-tools
 
 # Connect to MySQL
 mysql -hcst_mysql-5.7_1 -p
+```
+
+## Azure CLI
+Commands used in this project are stored in .azcli file, which leverages 'run command line' of Azure CLI Tools plugin.
+``` bash
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 ```

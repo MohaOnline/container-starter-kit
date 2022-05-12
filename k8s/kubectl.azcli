@@ -14,7 +14,21 @@ kubectl create deployment google-hello --image=gcr.io/google-samples/hello-app:1
 kubectl delete deployment google-hello  # 删除
 kubectl describe pod google-hello
 kubectl expose deployment google-hello --type=ClusterIP --port=8080
+curl 10.100.96.84:8080
 minikube service google-hello --url
+
+kubectl get deployments -o wide
+kubectl get services -o wide
+
+
+# 
+kubectl apply -f k8s/yaml/pv-host-data.yaml
+kubectl apply -f k8s/yaml/pvc-host-data.yaml
+kubectl get PersistentVolumes
+kubectl get PersistentVolumeClaim11
+kubectl get pv -o wide
+kubectl get pvc -o wide
+
 
 
 kubectl get deployments

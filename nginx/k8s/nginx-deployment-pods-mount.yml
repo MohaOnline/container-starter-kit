@@ -1,0 +1,39 @@
+# 部署三个 Pods
+# 操作指令参考 commands.azcli
+apiVersion: apps/v1
+kind: Deployment
+metadata: # Deployment name and labels
+  name: nginx-deployment
+  labels:
+    app: nginx-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-deployment-pods
+  template: # Describes the pods that will be created.
+    metadata: # Pods' name & label
+      name: nginx-deployment-pods
+      labels:
+        app: nginx-deployment-pods
+    spec:
+      volumes:
+        - name: app-root
+          persistentVolumeClaim:
+            claimName: nginx-deployment-pods-pvc
+      containers:
+        - name: nginx
+          # image: nginx:mainline
+          image: nginx:stable
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "0.5"
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/usr/share/nginx/html"
+              name: app-root

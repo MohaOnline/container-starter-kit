@@ -11,9 +11,16 @@ cd nginx/k8s
 # 部署
 kubectl apply -f nginx-deployment-pods.yml
 kubectl apply -f nginx-deployment-pods-job.yml
-kubectl apply -f nginx-deployment-pods-service.yml  # 部署 nginx-deployment-service
+kubectl apply -f nginx/k8s/nginx-deployment-pods-service.yml  # 部署 nginx-deployment-service
+# 检查 ingress ready
 kubectl get pods -n ingress-nginx
-kubectl apply -f nginx-deployment-pods-service-ingress.yml  
+kubectl apply -f nginx/k8s/nginx-deployment-pods-service-ingress.yml
+# 检查部署，500 时注意代理设置
+curl nginx-deployment-pods-service.192.168.49.2.nip.io
+kubectl apply -f nginx/k8s/nginx-deployment-pods-pvc.yml
+kubectl apply -f nginx/k8s/nginx-deployment-pods-mount.yml  # 带持久卷部署
+kubectl cp nginx/k8s/index.htm nginx-deployment-6b599bf9b7-595tc:/usr/share/nginx/html
+
 
 # 回滚
 kubectl rollout undo deployment nginx-deployment
@@ -21,9 +28,9 @@ kubectl rollout undo deployment nginx-deployment
 # 删除
 kubectl delete -f nginx-deployment-pods.yml
 kubectl delete deployments.apps nginx-deployment
-
 kubectl delete -f nginx-deployment-pods-job.yml
 kubectl delete -f nginx-deployment-pods-service.yml
+kubectl delete -f nginx/k8s/nginx-deployment-pods-service-ingress.yml
 
 # 巡查
 kubectl get nodes -o wide
@@ -37,6 +44,7 @@ kubectl get pods -o wide
 kubectl get pods -o wide --show-labels
 kubectl get pod -l app=nginx-deployment-pods -o wide
 kubectl get pod -l app=nginx-deployment-pods-job -o wide
+kubectl get pvc -o wide
 
 kubectl get deployments.apps nginx-deployment -o wide 
 kubectl get deployments nginx-deployment -o yaml  

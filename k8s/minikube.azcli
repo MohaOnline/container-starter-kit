@@ -3,12 +3,12 @@ $env:DOCKER_HOST="tcp://192.168.xxxx:2375"
 $env:MINIKUBE_HOME="$HOME\.minikube"  # minikube 配置文件存放路径
 
 # 用中国镜像启动 minikube
-minikube start --image-mirror-country='cn' --registry-mirror=https://.mirror.aliyuncs.com --cpus 4 --memory 6G 
-# --disk-size=40g --network-plugin=cni --extra-config=kubelet.network-plugin=cni
+minikube start --image-mirror-country='cn' --cpus 4 --memory 5.5G # --registry-mirror=https://.mirror.aliyuncs.com --disk-size=40g --network-plugin=cni --extra-config=kubelet.network-plugin=cni
+minikube delete
 
 # Version: https://github.com/kubernetes/minikube
 
-# Install 
+# Install Minikube
 curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
 sudo install minikube-linux-amd64 /usr/local/bin/minikube
 
@@ -20,6 +20,8 @@ sudo dpkg -i minikube_latest_amd64.deb
 minikube addons list
 minikube addons enable ingress
 minikube addons enable ingress-dns
+kubectl get pods -n ingress-nginx # Check ingress started
+
 
 kubectl create deployment echo-server --image=k8s.gcr.io/echoserver:1.4
 kubectl get deployment -o wide

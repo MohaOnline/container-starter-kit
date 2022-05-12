@@ -7,7 +7,9 @@ kind: Ingress
 metadata:
   name: minikube-basic-ingress
 spec:
-  rules:    # Accessible domain name, IP part need follow result of 'minikube ip'
+  rules: # Accessible domain name, IP part need follow result of 'minikube ip'
+    # Requirement: minikube addons enable ingress
+    # Access: curl nginx-deployment-pods-service.192.168.49.2.nip.io
     - host: nginx-deployment-pods-service.192.168.49.2.nip.io
       http:
         paths:
@@ -15,6 +17,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: nginx-deployment-pods-service     # Service Name
+                name: nginx-deployment-pods-service # Service Name
                 port:
                   number: 80
