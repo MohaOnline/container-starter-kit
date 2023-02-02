@@ -1,0 +1,47 @@
+# Deployed the service in bridge then map 6379 port to host.
+
+# https://github.com/docker-library/redis/blob/master/6.2/docker-entrypoint.sh
+# https://github.com/docker-library/redis/blob/master/6.2/Dockerfile
+
+# check through redis-cli:
+#   config get maxmemory
+#   redis-cli -h HOST --raw incr ping
+
+version: "3.3"
+
+services:
+
+    redis-6-bridge:
+        image: "redis:6"
+        restart: always
+            
+        volumes:
+            # - ./data:/data # Need change owner before bind: chown 999:999 data 
+            - ./conf/redis.conf:/data/redis.conf
+
+        # Append arguments to CMD
+        # command: > 
+        #     --requirepass 123456
+
+        # command:
+        #     - bash
+        #     - -c
+        #     - redis-server /data/redis.conf
+
+        command: >
+            /data/redis.conf
+
+        # environment:
+        ports:
+            - "6379:6379"  # HOST:CONTAINER
+        network_mode: "bridge"
+        healthcheck:
+            test: [ "CMD", "redis-cli", "--raw", "incr", "ping" ]
+            interval: 2s
+            timeout: 3s
+            retries: 5
+
+        # deploy:
+        #     resources:
+        #         limits:
+        #             memory: 384M
