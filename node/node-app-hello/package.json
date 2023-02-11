@@ -19,7 +19,7 @@
     },
     "devDependencies": {
         "jasmine": "^3.5.0",
-        "nodemon": "^2.0.3",
+        "nodemon": "^2.0.20",
         "request": "^2.88.2",
         "testcontainers": "^2.8.0"
     }
