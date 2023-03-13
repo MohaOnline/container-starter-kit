@@ -1,0 +1,32 @@
+# Deployed the service in bridge then map port to host.
+# attach to container to install certbot as default certificates need be renewed here.
+# 
+# apt update && apt dist-upgrade
+# apt install cron vim
+# apt install certbot python-certbot-nginx
+# certbot renew --nginx
+#
+version: "3.3"  # To use file based secrets.
+
+services:
+
+    # ModSecurity/nginx on 80/443 port.
+    modsecurity-crs-nginx:
+        image: "ma3310/modsecurity-crs:certbot"
+        restart: unless-stopped
+        ports:                  # Type: Array
+            - "80:80"           # HOST_PORT:CONTAINER_PORT
+            - "443:443"         
+        environment:            # Type: Object
+            TZ: Asia/Shanghai   # Set timezone for understanding logs contents better.
+        volumes:                # Type: Array
+            # Inject Whit IPs.
+            # Customized rules need be put under /opt/owasp-crs/rules/ which will be copied to /etc from docker starting stage.
+            - ./conf/modsecurity.d/modsecurity-ip-whitelist.conf:/opt/owasp-crs/rules/modsecurity-ip-whitelist.conf
+            - ./conf/nginx/templates/conf.d/default.conf.template:/etc/nginx/templates/conf.d/default.conf.template
+            - ./conf/nginx/conf.d:/etc/nginx/conf.d
+            - ./logs:/var/log
+            - ./logs/nginx:/var/log/nginx
+            - /etc/letsencrypt:/etc/letsencrypt
+        networks:
+            - default

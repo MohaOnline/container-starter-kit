@@ -1,0 +1,58 @@
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    listen 443 ssl default_server;
+    listen [::]:443 ssl default_server;
+
+    ssl_certificate ${PROXY_SSL_CERT};
+    ssl_certificate_key ${PROXY_SSL_CERT_KEY};
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:MozSSL:10m;
+    ssl_session_tickets off;
+
+    ssl_dhparam /etc/ssl/certs/dhparam-${PROXY_SSL_DH_BITS}.pem;
+
+    ssl_protocols ${PROXY_SSL_PROTOCOLS};
+    ssl_ciphers ${PROXY_SSL_CIPHERS};
+    ssl_prefer_server_ciphers ${PROXY_SSL_PREFER_CIPHERS};
+
+    ssl_stapling ${PROXY_SSL_OCSP_STAPLING};
+    ssl_stapling_verify ${PROXY_SSL_OCSP_STAPLING};
+
+    ssl_verify_client ${PROXY_SSL_VERIFY};
+
+    server_name ${SERVER_NAME};
+
+    location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        
+        deny all;
+    }
+
+    location /healthz {
+        access_log off;
+        deny all;
+        allow 127.0.0.0/24;
+        allow 192.168.0.0/16;
+        add_header Content-Type text/plain;
+        return 200 "OK";
+    }
+
+    location /metrics/nginx {
+        access_log off;
+        deny all;
+        allow 127.0.0.0/24;
+        allow 192.168.0.0/16;
+        proxy_store off;
+        stub_status;
+    }
+    
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+
+        deny all;
+    }
+}
